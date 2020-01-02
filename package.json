@@ -1,0 +1,18 @@
+{
+  "name": "sequence-with-priority",
+  "version": "0.0.1",
+  "description": "To create sequence of values, with priorities on to the top of sequence of values.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "number",
+    "alphabet",
+    "sequence",
+    "order",
+    "priority"
+  ],
+  "author": "Rikho Pratama",
+  "license": "MIT"
+}

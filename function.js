@@ -1,12 +1,49 @@
 module.exports = {
-  checkParams: ({ lastValue, highestPriorities }) => {
-    if(!lastValue) throw "You must include lastValue parameter";
-    if(typeof lastValue !== "number") throw 'lastValue must be a number (alphabet data type support is still under development)';
 
-    const isHighestPrioritiesItemTypesSame = highestPriorities.every((val, i, arr) => typeof val === typeof arr[0]);
-    if(!isHighestPrioritiesItemTypesSame) throw 'Array data of highest priorities, has different data type';
-    if(typeof lastValue !== typeof highestPriorities[0]) throw 'lastValue data type is not same with highestPriorities data type';
+  generateNumber({ result, order, step, startValue, lastValue }) {
+    const sequence = []
+    if(order === 'ASC') {
+      while (startValue <= lastValue) {
+        if (!result.includes(startValue)) {
+          sequence.push(startValue);
+        }
+        startValue += step;
+      }
+    } else if(order === 'DESC') {
+      while (startValue >= lastValue) {
+        if (!result.includes(startValue)) {
+          sequence.push(startValue);
+        }
+        startValue -= step;
+      }
+    }
 
-    return true;
+    return sequence;
+  },
+
+  generateAlphabet({ result, order, step, startValue, lastValue }) {
+    const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+    const sequence = [];
+
+    const startIndex = alphabet.findIndex(dt => dt === startValue);
+    const lastIndex = alphabet.findIndex(dt => dt === lastValue);
+    
+    if(order === 'ASC') {
+      for(let i = startIndex; i <= lastIndex;) {
+        result = result.map(v => v.toLowerCase());
+        if(!result.includes(alphabet[i])) sequence.push(alphabet[i])
+        i += step;
+      }
+    } else if(order === 'DESC') {
+      for(let i = startIndex; i >= lastIndex;) {
+        result = result.map(v => v.toLowerCase());
+        if(!result.includes(alphabet[i])) sequence.push(alphabet[i])
+        i -= step;
+      }
+    }
+
+    return sequence;
+
   }
+
 };

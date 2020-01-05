@@ -1,5 +1,5 @@
 # Sequence With Priority
-To create sequence of values (*current version is only support number, alphabet is under development*) with your chosen priority.
+To create sequence of value (*latest version is only support number, alphabet is under development*) with your chosen priority.
 
 
 ## Example
@@ -14,3 +14,25 @@ const result =
 
 // result => [ 5, 7, 4, 3, 6, 8, 9, 10 ]
 ```
+
+```js
+const  createSequence = require('sequence-with-priority');
+const  result =
+	createSequence({
+		startValue:  'c', //Optional, default value is a
+		lastValue:  'x',
+		step:  2, // Optional, default value is 1
+		highestPriorities: ['d','e','j']
+	});
+
+// result => [ 'd', 'e', 'j', 'c', 'g', 'i', 'k', 'm', 'o', 'q', 's', 'u', 'w', 'x' ]
+```
+
+## Parameter
+|Key|Data type|Default Value|Description|
+|--|--|--|--|
+|order|string|ASC|Order of sequence, have 2 options **ASC** and **DESC**|
+|startValue|string,integer|0 or a (based on lastValue you inputed)|start value of sequence
+|lastValue|string, integer|-|last value of sequence|
+|step|integer|1|Step of sequence|
+|highestPriorities|array|-|The priority values that will place on the top of sequence|

@@ -7,15 +7,23 @@
  */
 
 module.exports = ({
-  startValue = 0,
+  startValue,
   lastValue,
   step = 1,
   order = 'ASC',
   highestPriorities
 }) => {
-  const { checkParams } = require("./function");
+  const checkParams = require('./validation');
+  const { generateNumber, generateAlphabet } = require("./function");
 
   try {
+    // Set default value for start value
+    if(!startValue){
+      if(typeof lastValue === 'number') startValue = 0;
+      else if(typeof lastValue === 'string') startValue = 'a';
+    }
+
+    let getSequence;
     const checkParamsResult = checkParams({
       startValue,
       lastValue,
@@ -24,31 +32,24 @@ module.exports = ({
       highestPriorities
     });
 
-    if (checkParamsResult) {
+    if (checkParamsResult.valid) {
       const result = [];
 
-      for (const initialNumber of highestPriorities) {
-        result.push(initialNumber);
+      for (const initialValue of highestPriorities) {
+        const valueToPush = typeof initialValue === 'string' ? initialValue.toLowerCase() : initialValue;
+        result.push(valueToPush);
       };
 
-			if(order === 'ASC') {
-				while (startValue <= lastValue) {
-					if (!result.includes(startValue)) {
-						result.push(startValue);
-					}
-					startValue += step;
-				}
-			} else if(order === 'DESC') {
-				while (startValue >= lastValue) {
-					if (!result.includes(startValue)) {
-						result.push(startValue);
-					}
-					startValue -= step;
-				}
-			}
-      
+      if(checkParamsResult.dataType === 'number') {
+        getSequence = generateNumber({ result, order, step, startValue, lastValue });
+      } else if(checkParamsResult.dataType === 'string') {
+        getSequence = generateAlphabet({ result, order, step, startValue, lastValue });
+      };
 
-      return result;
+      const finalResult = result.concat(getSequence);
+      if(!finalResult.includes(lastValue)) finalResult.push(lastValue);
+
+      return finalResult;
     } else {
     }
   } catch (error) {

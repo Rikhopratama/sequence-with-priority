@@ -1,5 +1,5 @@
 # Sequence With Priority
-To create sequence of value (*latest version is only support number, alphabet is under development*) with your chosen priority.
+To create sequence of value with your chosen priority.
 
 
 ## Example

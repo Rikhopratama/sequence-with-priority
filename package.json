@@ -1,6 +1,6 @@
 {
   "name": "sequence-with-priority",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "To create sequence of values, with priorities on to the top of sequence of values.",
   "main": "index.js",
   "scripts": {
